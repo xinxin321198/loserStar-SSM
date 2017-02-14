@@ -1,8 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd" [  
 <!ENTITY contextInclude SYSTEM "org/springframework/web/context/WEB-INF/contextInclude.xml">  
-]>  
-<beans>  
-	<!--spring自动注入  -->
-    <bean id="springManager" class="com.loserstar.SpringManager.SpringManager"></bean>  
+]>
+<beans>
+	<!--spring自动注入 -->
+	<bean id="springManager" class="com.loserstar.SpringManager.SpringManager"></bean>
+
+	<!-- 配置数据源 -->
+	<bean id="jdbcDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>org.gjt.mm.mysql.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://10.0.0.2:3306/ynjgc?useUnicode=true&amp;characterEncoding=utf-8</value>
+			<!--springmybaitis是我的数据库 -->
+		</property>
+		<property name="username">
+			<value></value>
+		</property>
+		<property name="password">
+			<value></value>
+		</property>
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="jdbcDataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	</bean>
+	
+	<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.springMyBatis.system.dao.UserDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
 </beans>  
