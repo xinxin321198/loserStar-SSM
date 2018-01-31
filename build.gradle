@@ -37,11 +37,11 @@ dependencies{
 	
 	
 	 // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.6'
+    //compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.6'
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
-	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.6'
+	//compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.6'
 	// https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl
-	compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
+	//compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
 	
    	// https://mvnrepository.com/artifact/junit/junit
     compile group: 'junit', name: 'junit', version: '4.12'
@@ -64,9 +64,17 @@ dependencies{
 	
 	// https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp
 	compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
-		
+	
+	compile 'org.freemarker:freemarker:2.3.23'
+	
+	//jdk1.7
+	compile group: 'org.jodd', name: 'jodd-json', version: '3.7'
 
-		
+
+
+
+
+	
 }
 
 

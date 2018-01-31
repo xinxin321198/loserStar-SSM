@@ -3,7 +3,7 @@ REM task kill /F /IM "java.exe"
 @echo off
 chcp 936
 rem @setlocal
-set JAVA_HOME=e:\jdk1.8
+set JAVA_HOME=e:\jdk1.7
 set SVN_HOME=c:\Program Files\TortoiseSVN
 set GRADLE_HOME=E:\gradle3.4
 set MAVEN_HOME=E:\maven3.3
