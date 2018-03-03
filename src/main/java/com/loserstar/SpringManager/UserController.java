@@ -19,7 +19,7 @@ public class UserController {
     @RequestMapping("/toSuccess.do")
     public String ToSuccess(HttpServletRequest request){  
         WebApplicationContext ac1 = WebApplicationContextUtils.getWebApplicationContext(request.getSession().getServletContext());  
-        WebApplicationContext ac2=RequestContextUtils.getWebApplicationContext(request);  
+//        WebApplicationContext ac2=RequestContextUtils.getWebApplicationContext(request);  
         springManager.get();  
         return "success";  
     }  
