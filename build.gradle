@@ -70,6 +70,8 @@ dependencies{
 	//jdk1.7
 	compile group: 'org.jodd', name: 'jodd-json', version: '3.7'
 
+	// https://mvnrepository.com/artifact/org.apache.shiro/shiro-core
+	compile group: 'org.apache.shiro', name: 'shiro-core', version: '1.4.0'
 
 
 
