@@ -33,8 +33,6 @@ public class userTest {
 	}
 	
 	
-	
-	
 	/**
 	 * 根据name模糊查询
 	 * @throws IOException
@@ -42,7 +40,7 @@ public class userTest {
 	@Test
 	public void findUserListByNameTest() throws IOException{
 		User userParam = new User();
-		userParam.setUserName("h");
+		userParam.setUserName("a");
 		List<User> userList = userDao.findList(userParam);
 		
 		for (User resultUser : userList) {
@@ -61,7 +59,6 @@ public class userTest {
 	 * 添加用户
 	 * @throws IOException
 	 */
-	@Test
 	public void insertUserTest() throws IOException{
 		User insertUser = new User();
 		insertUser.setUserName(UUID.randomUUID().toString());
@@ -71,10 +68,26 @@ public class userTest {
 	}
 	
 	/**
+	 * 修改用户信息
+	 * @throws IOException 
+	 */
+	public void updateUserTest() throws IOException{
+		User updateUser = new User();
+		updateUser.setId(16);
+		updateUser.setUserName("newName_"+UUID.randomUUID());
+		updateUser.setPassword(String.valueOf("newPassword_"+new Random().nextInt(9999999)));
+		userDao.update(updateUser);
+	}
+	
+	
+	public void deleteUserTest() throws IOException{
+		userDao.delete(16);
+	}
+	
+	/**
 	 * 得到一个单个用户的示例
 	 * @throws IOException
 	 */
-	@Test
 	public void getUserTest() throws IOException{
 		User resultUser = userDao.get(16);
 		System.out.println("--------------查询到user:id:"+resultUser.getId()+" userName:"+resultUser.getUserName()+" password:"+resultUser.getPassword());
@@ -85,27 +98,9 @@ public class userTest {
 
 	
 	
-	/**
-	 * 修改用户信息
-	 * @throws IOException 
-	 */
-	@Test
-	public void updateUserTest() throws IOException{
-		User updateUser = new User();
-		updateUser.setId(16);
-		updateUser.setUserName("newName_"+UUID.randomUUID());
-		updateUser.setPassword(String.valueOf("newPassword_"+new Random().nextInt(9999999)));
-		userDao.update(updateUser);
-	}
+
 	
 	
-	@Test
-	public void deleteUserTest() throws IOException{
-		userDao.delete(16);
-	}
-	
-	
-	@Test
 	public void findUserVoListTest(){
 		User userParam = new User();
 		userParam.setUserName("h");
@@ -117,7 +112,6 @@ public class userTest {
 	}
 	
 	
-	@Test
 	public void findListByIdsTest(){
 		List<Integer> ids = new ArrayList<Integer>();
 		ids.add(12);

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>loserStar-SSM</groupId>
 	<artifactId>loserStar-SSM</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<name>loserStar-SSM</name>
 	<url>http://maven.apache.org</url>
@@ -120,8 +120,9 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<!-- <version>5.1.45</version> -->
-			<version>6.0.6</version>
+			 <version>5.1.45</version>
+			 <!--jdk1.8才能用6.0的驱动  -->
+			<!-- <version>6.0.6</version> -->
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
@@ -160,6 +161,9 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
+
+
+		
 		<!-- https://mvnrepository.com/artifact/org.jodd/jodd-json -->
 		<dependency>
 			<groupId>org.jodd</groupId>
