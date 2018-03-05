@@ -8,15 +8,21 @@ import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.loserstar.dao.UserDao;
 import com.loserstar.entity.User;
 import com.loserstar.entity.UserVo;
 
 @Rollback(value=false)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations={"classpath:spring.xml"})
 public class userTest {
 	
 	//mybatis核心的类
@@ -24,7 +30,8 @@ public class userTest {
 	//mybatis核心的类
 //	private SqlSession sqlSession;
 	//mapper代理的方式
-	private static UserDao userDao;
+//	@Autowired
+	private  static UserDao userDao;
 	
 	@Before
 	public void before() throws IOException{
