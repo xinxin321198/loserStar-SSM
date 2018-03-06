@@ -3,8 +3,11 @@ package com.loserstar.gradletest;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
+
+import javax.sql.DataSource;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -31,12 +35,15 @@ public class userTest {
 //	private SqlSession sqlSession;
 	//mapper代理的方式
 //	@Autowired
-	private  static UserDao userDao;
+	private   UserDao userDao;
+	private JdbcTemplate jdbcTemplate;
 	
 	@Before
 	public void before() throws IOException{
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
 		userDao = (UserDao)applicationContext.getBean("userDao");
+		DataSource dataSource = (DataSource)applicationContext.getBean("dataSource");
+		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
 	
@@ -54,6 +61,18 @@ public class userTest {
 			System.out.println("mapper代理dao--------------查询到user:id:"+resultUser.getId()+" userName:"+resultUser.getUserName()+" password:"+resultUser.getPassword());
 		}
 		
+	}
+	
+	/**
+	 * 使用spring的JDBCTemplate
+	 */
+	@Test
+	public void findUserListByNameForSpringJDBCTest(){
+		String sql = "select * from sys_users";
+		List<Map<String, Object>> userList = jdbcTemplate.queryForList(sql);
+		for (Map<String, Object> resultUser : userList) {
+			System.out.println("spring的JDBCTemplate--------------查询到user:id:"+resultUser.get("id")+" userName:"+resultUser.get("user_name")+" password:"+resultUser.get("password"));
+		}
 	}
 	
 	
