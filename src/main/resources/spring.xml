@@ -9,10 +9,13 @@
 	<!--spring自动注入 -->
 	<bean id="springManager" class="com.loserstar.SpringManager.SpringManager"></bean>
 
-
-	<!-- 我靠，还是获取不到配置文件，我就不知道啥子原因了 -->
+<!-- 扫描springbean的包路径(如果不加的话，spring不会去扫描注解，jfinal的db配置就不会被初始化) -->
+	<context:component-scan base-package="com.loserstar" />
+			
+	<!-- 获取配置文件 -->
 	<context:property-placeholder location="classpath:db.properties"/>
 
+	<!--配置数据源，可以提到其它xml文件中去  -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driver}" />

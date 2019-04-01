@@ -178,8 +178,12 @@
 			<artifactId>shiro-core</artifactId>
 			<version>1.4.0</version>
 		</dependency>
-
-
+		<!--https://github.com/xinxin321198/loserStarUtils -->
+		<dependency>
+			<groupId>com.loserstar</groupId>
+			<artifactId>loserStarUtils</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

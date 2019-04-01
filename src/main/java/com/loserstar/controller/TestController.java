@@ -10,20 +10,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jfinal.plugin.activerecord.Record;
 import com.loserstar.dao.UserDao;
 import com.loserstar.entity.User;
+import com.loserstar.jfinal.service.UserService;
+import com.loserstar.utils.db.jfinal.vo.VResult;
 
 @Controller
 @RequestMapping(value="/test")
-public class testController{
-
+public class TestController extends BaseController{
 	
+	private UserService userService = new UserService();
+	/**
+	 * 简单的一个页面
+	 * @return
+	 */
 	@RequestMapping(value="loser")
 	public String home() {
 		System.out.println("homehomehomehomehomehomehomehomehomehomehomehomehome");
 		return "home";
 	}
 	
+	/**
+	 * 使用mybatis查询数据
+	 * @return
+	 */
 	@RequestMapping(value="json")
 	@ResponseBody
 	public Map<String, Object> json(){
@@ -40,6 +51,18 @@ public class testController{
 		return returnMap;
 	}
 	
-	
+	@RequestMapping(value="jfinal")
+	@ResponseBody
+	public VResult jfinal(){
+		VResult result = new VResult();
+		try {
+			List<Record> userList = userService.getList(null);
+			result.ok("获取到数据");
+			result.setData(getColumns(userList));
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }
