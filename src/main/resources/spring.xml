@@ -15,11 +15,11 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="driverClassName" value="${jdbc.driver}" />
 		<property name="url"
-			value="jdbc:mysql://127.0.0.1:3306/dataagg?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />
-		<property name="username" value="root" />
-		<property name="password" value="root" />
+			value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 		<!-- 初始化连接大小 <property name="initialSize" value="${initialSize}"></property> 
 			连接池最大数量 <property name="maxActive" value="${maxActive}"></property> 连接池最大空闲 
 			<property name="maxIdle" value="${maxIdle}"></property> 连接池最小空闲 <property 
