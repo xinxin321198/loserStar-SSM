@@ -7,6 +7,8 @@
  */
 package com.loserstar.jfinal.config;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.dialect.AnsiSqlDialect;
+import com.loserstar.utils.date.LoserStarDateUtils;
 
 
 /**
@@ -34,7 +37,7 @@ public class JfinalConfig {
 	
 	@Bean(initMethod = "start", destroyMethod = "stop")
 	public ActiveRecordPlugin init2() {
-		System.out.println("2222222222222222222222222222222222222222");
+		System.out.println("init----------Jfinal plugin---------------------"+LoserStarDateUtils.format(new Date()));
 		ActiveRecordPlugin arp2 = new ActiveRecordPlugin(dataSource);
 		arp2.setShowSql(true);// 打印出执行的sql
 		arp2.setDialect(new AnsiSqlDialect());
