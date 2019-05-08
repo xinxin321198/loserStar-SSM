@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-home.jsp
+jsp view
 </body>
 </html>
