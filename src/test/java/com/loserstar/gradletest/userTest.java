@@ -11,20 +11,16 @@ import javax.sql.DataSource;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.loserstar.dao.UserDao;
 import com.loserstar.entity.User;
 import com.loserstar.entity.UserVo;
 
-@Rollback(value=false)
+//@Rollback(value=false)
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations={"classpath:spring.xml"})
 public class userTest {
@@ -35,15 +31,15 @@ public class userTest {
 //	private SqlSession sqlSession;
 	//mapper代理的方式
 //	@Autowired
-	private   UserDao userDao;
-	private JdbcTemplate jdbcTemplate;
+//	private   UserDao userDao;//通过注解spring自动注入
+	
+	private  static ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");//注意：不能多次载入spring.xml，因为集成了jfinal，会多次初始化jfinal的配置，导致数据库连接对象重复
+	private  static UserDao userDao  = (UserDao)applicationContext.getBean("userDao");//手动从spring获取对象
+	private  static DataSource dataSource = (DataSource)applicationContext.getBean("dataSource");
+	private  static JdbcTemplate jdbcTemplate  = new JdbcTemplate(dataSource);
 	
 	@Before
 	public void before() throws IOException{
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
-		userDao = (UserDao)applicationContext.getBean("userDao");
-		DataSource dataSource = (DataSource)applicationContext.getBean("dataSource");
-		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
 	

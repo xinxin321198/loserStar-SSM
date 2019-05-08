@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.jfinal.plugin.activerecord.Record;
 import com.loserstar.dao.UserDao;
@@ -25,19 +26,36 @@ public class TestController extends BaseController{
 	 * 简单的一个页面
 	 * @return
 	 */
-	@RequestMapping(value="loser")
-	public String home() {
-		System.out.println("homehomehomehomehomehomehomehomehomehomehomehomehome");
-		return "home";
+	@RequestMapping(value="jsp")
+	public ModelAndView  jsp(ModelAndView modelAndView) {
+		System.out.println("jspjspjspjspjspjspjspjspjspjspjspjspjspjspjspjspjspjspjspjspjspjspjspjsp");
+		modelAndView.setViewName("jsp");
+		return modelAndView ;
+	}
+	@RequestMapping(value="ftl")
+	public String ftl() {
+		System.out.println("ftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftlftl");
+		return "ftl";
+	}
+	
+	@RequestMapping(value="json")
+	@ResponseBody
+	public Map<String, Object> json(){
+		Map<String, Object> result = new HashMap<String,Object>();
+		result.put("aaa", "这是aaaa");
+		result.put("bbb", "这是bbb");
+		result.put("ccc", "这是ccc");
+		result.put("int", 111);
+		return result;
 	}
 	
 	/**
 	 * 使用mybatis查询数据
 	 * @return
 	 */
-	@RequestMapping(value="json")
+	@RequestMapping(value="mybatis")
 	@ResponseBody
-	public Map<String, Object> json(){
+	public Map<String, Object> mybatis(){
 		Map<String, Object> returnMap = new HashMap<String,Object>();
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
 		UserDao userDao = (UserDao)applicationContext.getBean("userDao");

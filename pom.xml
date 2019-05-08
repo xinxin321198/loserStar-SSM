@@ -184,6 +184,20 @@
 			<artifactId>loserStarUtils</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		       <!-- spring-context-support -->
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.3.7.RELEASE</version>
+        </dependency>
+        
+	<dependency>  
+	   <groupId>javax.servlet</groupId>  
+	   <artifactId>jstl</artifactId>  
+	   <version>1.2</version>  
+	   <scope>runtime</scope>  
+	</dependency> 
 	</dependencies>
 
 	<build>

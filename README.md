@@ -1,6 +1,6 @@
 # loserStar-SSM
 ## 一个简单SSM基础框架
-* ## 此项目是为了方便临时需要开发一些小功能时候可以很快捷的直接拿来用，很大众很简单的架构
+* ## 此项目是为了方便临时需要开发一些小功能时候可以很快捷的直接拿来用，很大众很简单的架构，基于maven和gradle构建（gradle的配置好久没更新了，基本都是更新maven的）
 * ## 基于springMVC+spring+mybatis作为基础，且依赖自己的工具库[loserStarUtils](https://github.com/xinxin321198/loserStarUtils)
 * ## db.sql里是mysql的数据库表结构的demo
 * ## 逐步会加入一些新的用到的框架集成进去，如果不需要的框架可以直接剔除就行了

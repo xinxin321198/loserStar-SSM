@@ -16,7 +16,7 @@
 	<context:component-scan base-package="com.loserstar.controller"/>
 	
 	<!-- 开启注解 -->  
-    <mvc:annotation-driven/>  
+    <mvc:annotation-driven/> 
     
  <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->  
 <!--     <bean  
@@ -28,15 +28,90 @@
         </property>  
     </bean>   -->
     
+    <!-- resources -->
+	<mvc:resources location="/" mapping="/**/*.js" />
+	<mvc:resources location="/" mapping="/**/*.css" />
+	<mvc:resources location="/" mapping="/**/*.map" />
+	<mvc:resources location="/" mapping="/**/*.html" />
+	<mvc:resources location="/" mapping="/**/*.png" />
+	<mvc:resources location="/" mapping="/**/*.gif" />
     
-        <!-- 定义跳转的文件的前后缀 ，视图模式配置-->  
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
-        <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->  
-        <property name="prefix" value="/WEB-INF/jsp/" />  
-        <property name="suffix" value=".jsp" />  
+        <!--JSP视图解析器-->
+        <!-- 此模式controller返回的视图名必须带模板文件名后缀去匹配 -->
+<!--     <bean id="viewResolverJsp" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<property name="viewNames" value="*.jsp" />代表controller return 时候所带的后缀匹配到的话就使用这个视图解析器
+        <property name="prefix" value="/jsp/"/>视图前缀，理解为jsp文件存放路径吧 
+        <property name="suffix" value=""/>jsp解析器解析文件的后缀名，springmvc会自动加上这个，如果return时候呆后缀，这里就不能设置，否则就重复了，如果不设置，那么系统会把找到的文件都使用jsp来解析
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="order" value="1"/>
+    </bean> -->
+    	<!-- 此模式 自动根据视图解析器的优先级匹配，controller返回的视图名不用带后缀 -->
+        <bean id="viewResolverJsp" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/jsp/"/><!--视图前缀，理解为jsp文件存放路径吧  -->
+        <property name="suffix" value=".jsp"/><!-- jsp解析器解析文件的后缀名，springmvc会自动加上这个，如果return时候呆后缀，这里就不能设置，否则就重复了，如果不设置，那么系统会把找到的文件都使用jsp来解析 -->
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="order" value="1"/>
+    </bean>
+    
+     <bean id="freemarkerConfig" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:freemarker.properties"/>
+    </bean>
+    
+    <!-- 配置freeMarker视图解析器 -->
+    <!-- 此模式controller返回的视图名必须带模板文件名后缀去匹配 -->
+<!--     <bean id="freeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <property name="viewNames" value="*.ftl" />代表controller return 时候所带的后缀匹配到的话就使用这个视图解析器
+        <property name="suffix" value=""/>
+        <property name="cache" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        在页面中使用${rc.contextPath}就可获得contextPath
+        <property name="requestContextAttribute" value="rc"/>
+        <property name="order" value="0"/>
+    </bean> -->
+    <!-- 此模式 自动根据视图解析器的优先级匹配，controller返回的视图名不用带后缀 -->
+    <bean id="freeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <property name="suffix" value=".ftl"/>
+        <property name="cache" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <!-- 在页面中使用${rc.contextPath}就可获得contextPath -->
+        <property name="requestContextAttribute" value="rc"/>
+        <property name="order" value="0"/>
+    </bean>
+    <!-- 配置freeMarker的模板路径 -->
+    <bean id="FreeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/ftl/"/><!--freemarker模板的存放路径  -->
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="xml_escape" value-ref="fmXmlEscape" />
+            </map>
+        </property>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="freemarkerSettings" ref="freemarkerConfig"/>
+ 
+    </bean>
+ 
+
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+    
+    
+    
+    
+    <bean id="multipartResolver"  
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <!-- set the max upload size100MB -->  
+        <property name="maxUploadSize">  
+            <value>104857600</value>  
+        </property>  
+        <property name="maxInMemorySize">  
+            <value>4096</value>  
+        </property>  
     </bean>  
-	<!-- ... -->
-
-
-	
 </beans>

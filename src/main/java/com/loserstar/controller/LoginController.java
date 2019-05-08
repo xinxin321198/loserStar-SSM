@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.loserstar.entity.User;
-import com.loserstar.utils.JsonUtil;
+import com.loserstar.utils.json.LoserStarJsonUtil;
 
 @Controller
 @RequestMapping(value="/login")
@@ -22,7 +22,7 @@ public class LoginController {
 	@RequestMapping(value="login")
 	@ResponseBody
 	public String login(User user) {
-		System.out.println(JsonUtil.toJson(user));
+		System.out.println(LoserStarJsonUtil.toJsonDeep(user));
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(),user.getPassword());
 		token.setRememberMe(true);
@@ -30,7 +30,7 @@ public class LoginController {
 		
 		boolean hasAdmin = subject.hasRole("admin");
 		System.out.println("hasAdmin"+hasAdmin);
-		return JsonUtil.toJson(user);
+		return LoserStarJsonUtil.toJsonDeep(user);
 	}
 	
 }

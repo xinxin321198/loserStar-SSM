@@ -34,6 +34,7 @@ public class JfinalConfig {
 	
 	@Bean(initMethod = "start", destroyMethod = "stop")
 	public ActiveRecordPlugin init2() {
+		System.out.println("2222222222222222222222222222222222222222");
 		ActiveRecordPlugin arp2 = new ActiveRecordPlugin(dataSource);
 		arp2.setShowSql(true);// 打印出执行的sql
 		arp2.setDialect(new AnsiSqlDialect());
